@@ -1,12 +1,28 @@
+import React from "react";
+
 export default function Usuario(props) {
+
+    let nomeInicial = "Catana"
+    let [nome, setNome] = React.useState(nomeInicial);
+    let [imagem, setImagem] = React.useState(props.enderecoImagem);
+
+    function trocarFoto() {
+        let linkFoto = prompt("Coloque aqui o link da nova imagem");
+
+        if (linkFoto === "" || linkFoto === null) {
+            setImagem(props.enderecoImagem);
+        } else {
+            setImagem(linkFoto);
+        }
+    }
     return (
         <div className="usuario">
-            <img src={props.enderecoImagem} alt="Profile Picture"/>
+            <img src={imagem} onClick = {trocarFoto} alt="Profile Picture" />
             <div className="texto">
                 <strong>{props.usuario}</strong>
                 <span>
-                    Catana
-                    <ion-icon name="pencil"></ion-icon>
+                    {nome}
+                    <ion-icon onClick = {() => setNome(prompt("Você quer alterar para qual nome?"))} name="pencil"></ion-icon>
                 </span>
             </div>
         </div>)
